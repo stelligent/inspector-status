@@ -74,7 +74,6 @@ class Inspector
       begin
         asset_attr = issue.asset_attributes
         puts ''
-         => #<struct Aws::Inspector::Types::AssetAttributes schema_version=1, agent_id="i-2a42ffac", auto_scaling_group=nil, ami_id=nil, hostname=nil, ipv4_addresses=[]>
         puts "ASG: #{asset_attr.auto_scaling_group}" unless asset_attr.auto_scaling_group.nil?
         puts "HOST: #{asset_attr.hostname}" unless asset_attr.hostname.nil?
         puts "type: #{issue.asset_type}"
