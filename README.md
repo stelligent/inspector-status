@@ -21,7 +21,8 @@ Note: Your resources should already be tagged with whatever you will have set in
 ## Requirements / Setup
 
 * A modern Ruby of the 2.x variety
-* AWS IAM role with proper permissions to AWS Inspector OR one of the following configuration methods for [aws-sdk](https://github.com/aws/aws-sdk-ruby#configuration)
+* AWS IAM role with proper permissions to AWS Inspector OR one of the following configuration methods for [aws-sdk](https://github.com/aws/aws-sdk-ruby#configuration). Also ensure you configure against the proper region.
+* Tagged AWS resources in the region you plan to inspect against
 * Git to clone out the repo
 
 ## Installation
@@ -41,7 +42,7 @@ rake run
 
 ## AWS Resources
 
-Resources are created in AWS with whatever name prefix you choose in the config file OR the command line, This creates resources with the prefix-name, a random string, and then the type concatenated. By default resources will be cleaned up after. The run/findings will be left.
+Resources are created in AWS with whatever name prefix you choose in the config file OR the command line, This creates resources with the prefix-name, a random string, and then the type concatenated. By default resources will be cleaned up after. The run/findings will be left in your AWS account for posterity.
 
 ## Options
 Note: The provided config file has all of these options. If an option is provided below then the config file's option will be overridden by the CLI argument.
@@ -63,4 +64,8 @@ Usage: ./inspector.rb [options]
 ```
 
 ## Evaluate for failure
-The evaluate for failure configuration is a method of failing your CI pipeline/toolchain when a severity, or compromise greater than what you have set has occurred. This works on numeric and/or true/false values within the output of the report. The config file has a few examples of how to use this but the most common are setting the numeric_severity and indicator_of_compromise. This way on critical or compromising issues you can fail your toolchain.
+The evaluate for failure configuration is a method of failing your CI pipeline/toolchain when a severity, or compromise greater than what you have set has occurred. 
+
+This works on numeric and/or true/false values within the output of the report. The config file has a few examples of how to use this but the most common are setting the numeric_severity and indicator_of_compromise. 
+
+This way on critical or compromising issues you can fail your toolchain.
