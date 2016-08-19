@@ -10,8 +10,13 @@ This is a tool to execute AWS inspector templates against targets and report the
 
 ## How it does it
 
-This tool uses the aws-sdk to programmatically interact with the AWS Inspector API to create, modify, run and delete resources. At the moment of this writing Cloudformation does not support Inspector. This tool uses a config file and/or CLI arguments to build the attributes needed to create these resources.
-The results are then printed to stdout for consumption by reporting/pipeline functions. Inspector runs assessments against resource targets, these are tagged AWS Resources (instances, services, etc). Your resources should already be tagged with whatever you will have set in your target_tags in the config file.
+This tool uses the aws-sdk to programmatically interact with the AWS Inspector API to create, modify, run and delete resources. 
+
+At the moment of this writing Cloudformation does not support Inspector. This tool uses a config file and/or CLI arguments to build the attributes needed to create these resources.
+
+The results are then printed to stdout for consumption by reporting/pipeline functions. Inspector runs assessments against resource targets, these are tagged AWS Resources (instances, services, etc). 
+
+Note: Your resources should already be tagged with whatever you will have set in your target_tags in the config file.
 
 ## Requirements / Setup
 
