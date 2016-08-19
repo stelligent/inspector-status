@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 # Core
 gem 'aws-sdk'
+gem 'rake'
 
 group :dev do
   # Testing

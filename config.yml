@@ -1,0 +1,30 @@
+#
+# This config file controls input defaults for inspector status, this file is overridden by any given CLI input arguments
+#
+
+# Name prefixed to all resources created in AWS
+aws_name_prefix: mycipipeline
+
+# The minimum failures of each type to cause an exit status of the found issues. E.g. if you set severity to 3.0, anything higher than that will trigger a non-clean exit
+failure_metrics:
+  numeric_severity: 3
+  indicator_of_compromise: true
+
+# The AWS Rulesets to run against your inspection tags, This is the name returned by the API as the arn is different per region
+rules_to_run:
+  - Security Best Practices
+  - Runtime Behavior Analysis
+  - Common Vulnerabilities and Exposures
+  - CIS Operating System Security Configuration Benchmarks
+
+# The tags to target during our inspection
+target_tags:
+  auditable: true
+  inspectable: true
+  Name: ImCompromised
+
+# The duration (in seconds) to scan our resources for
+asset_duration: 60
+
+# Should AWS Created resources be deleted at the end of the assessment (Note: The run/findings will be kept)
+cleanup_resources: true

@@ -1,0 +1,232 @@
+{
+  "InspectorOutput": [
+    {
+      "arn": "arn:aws:inspector:us-east-1:324320755747:target/0-ttQC7Qgp/template/0-ekXUj0eN/run/0-X8vp78fB/finding/0-1duBTl8O",
+      "schema_version": 1,
+      "service": "Inspector",
+      "service_attributes": {
+        "schema_version": 1,
+        "assessment_run_arn": "arn:aws:inspector:us-east-1:324320755747:target/0-ttQC7Qgp/template/0-ekXUj0eN/run/0-X8vp78fB",
+        "rules_package_arn": "arn:aws:inspector:us-east-1:316112463485:rulespackage/0-R01qwB5Q"
+      },
+      "asset_type": "ec2-instance",
+      "asset_attributes": {
+        "schema_version": 1,
+        "agent_id": "i-cffd4956",
+        "ipv4_addresses": [
+
+        ]
+      },
+      "id": "Disable root login over SSH",
+      "title": "Instance i-cffd4956 is configured to allow users to log in with root credentials over SSH. This increases the likelihood of a successful brute-force attack.",
+      "description": "This rule helps determine whether the SSH daemon is configured to permit logging in to your EC2 instance as root.",
+      "recommendation": "It is recommended that you configure your EC2 instance to prevent root logins over SSH. Instead, log in as a non-root user and use **sudo** to escalate privileges when necessary. To disable SSH root logins, set **PermitRootLogin** to \"no\" in **/etc/ssh/sshd_config** and restart sshd.",
+      "severity": "Medium",
+      "numeric_severity": 6.0,
+      "confidence": 10,
+      "indicator_of_compromise": false,
+      "attributes": [
+        {
+          "key": "INSTANCE_ID",
+          "value": "i-cffd4956"
+        }
+      ],
+      "user_attributes": [
+
+      ],
+      "created_at": "2016-08-18 12:02:49 -0600",
+      "updated_at": "2016-08-18 12:02:49 -0600"
+    },
+    {
+      "arn": "arn:aws:inspector:us-east-1:324320755747:target/0-ttQC7Qgp/template/0-ekXUj0eN/run/0-X8vp78fB/finding/0-8p0Ao8Qe",
+      "schema_version": 1,
+      "service": "Inspector",
+      "service_attributes": {
+        "schema_version": 1,
+        "assessment_run_arn": "arn:aws:inspector:us-east-1:324320755747:target/0-ttQC7Qgp/template/0-ekXUj0eN/run/0-X8vp78fB",
+        "rules_package_arn": "arn:aws:inspector:us-east-1:316112463485:rulespackage/0-R01qwB5Q"
+      },
+      "asset_type": "ec2-instance",
+      "asset_attributes": {
+        "schema_version": 1,
+        "agent_id": "i-981da201",
+        "ipv4_addresses": [
+
+        ]
+      },
+      "id": "Disable root login over SSH",
+      "title": "Instance i-981da201 is configured to allow users to log in with root credentials over SSH. This increases the likelihood of a successful brute-force attack.",
+      "description": "This rule helps determine whether the SSH daemon is configured to permit logging in to your EC2 instance as root.",
+      "recommendation": "It is recommended that you configure your EC2 instance to prevent root logins over SSH. Instead, log in as a non-root user and use **sudo** to escalate privileges when necessary. To disable SSH root logins, set **PermitRootLogin** to \"no\" in **/etc/ssh/sshd_config** and restart sshd.",
+      "severity": "Medium",
+      "numeric_severity": 6.0,
+      "confidence": 10,
+      "indicator_of_compromise": false,
+      "attributes": [
+        {
+          "key": "INSTANCE_ID",
+          "value": "i-981da201"
+        }
+      ],
+      "user_attributes": [
+
+      ],
+      "created_at": "2016-08-18 12:02:49 -0600",
+      "updated_at": "2016-08-18 12:02:49 -0600"
+    },
+    {
+      "arn": "arn:aws:inspector:us-east-1:324320755747:target/0-ttQC7Qgp/template/0-ekXUj0eN/run/0-X8vp78fB/finding/0-E1oyMf11",
+      "schema_version": 1,
+      "service": "Inspector",
+      "service_attributes": {
+        "schema_version": 1,
+        "assessment_run_arn": "arn:aws:inspector:us-east-1:324320755747:target/0-ttQC7Qgp/template/0-ekXUj0eN/run/0-X8vp78fB",
+        "rules_package_arn": "arn:aws:inspector:us-east-1:316112463485:rulespackage/0-gEjTy7T7"
+      },
+      "asset_type": "ec2-instance",
+      "asset_attributes": {
+        "schema_version": 1,
+        "ipv4_addresses": [
+
+        ]
+      },
+      "title": "No potential security issues found",
+      "description": "Amazon Inspector did not find any potential security issues during this assessment.",
+      "recommendation": "No remediation needed.",
+      "severity": "Informational",
+      "numeric_severity": 0.0,
+      "confidence": 10,
+      "indicator_of_compromise": false,
+      "attributes": [
+
+      ],
+      "user_attributes": [
+
+      ],
+      "created_at": "2016-08-18 12:02:49 -0600",
+      "updated_at": "2016-08-18 12:02:49 -0600"
+    },
+    {
+      "arn": "arn:aws:inspector:us-east-1:324320755747:target/0-ttQC7Qgp/template/0-ekXUj0eN/run/0-X8vp78fB/finding/0-F1YRhRaW",
+      "schema_version": 1,
+      "service": "Inspector",
+      "service_attributes": {
+        "schema_version": 1,
+        "assessment_run_arn": "arn:aws:inspector:us-east-1:324320755747:target/0-ttQC7Qgp/template/0-ekXUj0eN/run/0-X8vp78fB",
+        "rules_package_arn": "arn:aws:inspector:us-east-1:316112463485:rulespackage/0-rExsr2X8"
+      },
+      "asset_type": "ec2-instance",
+      "asset_attributes": {
+        "schema_version": 1,
+        "agent_id": "i-981da201",
+        "ipv4_addresses": [
+
+        ]
+      },
+      "id": "This rules package is not compatible with the host OS",
+      "title": "Unsupported Operating System or Version",
+      "description": "\nOperating system \"Ubuntu 14.04.4 LTS\", found on the instance i-981da201, is not supported by this Rules Package. \n\n\nThe supported operating systems are: Amazon Linux AMI release 2015.03, Microsoft Windows Server 2008 R2, Microsoft Windows Server 2012 R2",
+      "recommendation": "Not available",
+      "severity": "Informational",
+      "numeric_severity": 0.0,
+      "confidence": 10,
+      "indicator_of_compromise": false,
+      "attributes": [
+        {
+          "key": "OS_INFO",
+          "value": "\"Ubuntu 14.04.4 LTS\""
+        },
+        {
+          "key": "SUPPORTED_OS",
+          "value": "Amazon Linux AMI release 2015.03, Microsoft Windows Server 2008 R2, Microsoft Windows Server 2012 R2"
+        },
+        {
+          "key": "INSTANCE_ID",
+          "value": "i-981da201"
+        }
+      ],
+      "user_attributes": [
+
+      ],
+      "created_at": "2016-08-18 12:02:49 -0600",
+      "updated_at": "2016-08-18 12:02:49 -0600"
+    },
+    {
+      "arn": "arn:aws:inspector:us-east-1:324320755747:target/0-ttQC7Qgp/template/0-ekXUj0eN/run/0-X8vp78fB/finding/0-KmR0eTmO",
+      "schema_version": 1,
+      "service": "Inspector",
+      "service_attributes": {
+        "schema_version": 1,
+        "assessment_run_arn": "arn:aws:inspector:us-east-1:324320755747:target/0-ttQC7Qgp/template/0-ekXUj0eN/run/0-X8vp78fB",
+        "rules_package_arn": "arn:aws:inspector:us-east-1:316112463485:rulespackage/0-rExsr2X8"
+      },
+      "asset_type": "ec2-instance",
+      "asset_attributes": {
+        "schema_version": 1,
+        "agent_id": "i-cffd4956",
+        "ipv4_addresses": [
+
+        ]
+      },
+      "id": "This rules package is not compatible with the host OS",
+      "title": "Unsupported Operating System or Version",
+      "description": "\nOperating system \"Ubuntu 14.04.4 LTS\", found on the instance i-cffd4956, is not supported by this Rules Package. \n\n\nThe supported operating systems are: Amazon Linux AMI release 2015.03, Microsoft Windows Server 2008 R2, Microsoft Windows Server 2012 R2",
+      "recommendation": "Not available",
+      "severity": "Informational",
+      "numeric_severity": 0.0,
+      "confidence": 10,
+      "indicator_of_compromise": false,
+      "attributes": [
+        {
+          "key": "OS_INFO",
+          "value": "\"Ubuntu 14.04.4 LTS\""
+        },
+        {
+          "key": "SUPPORTED_OS",
+          "value": "Amazon Linux AMI release 2015.03, Microsoft Windows Server 2008 R2, Microsoft Windows Server 2012 R2"
+        },
+        {
+          "key": "INSTANCE_ID",
+          "value": "i-cffd4956"
+        }
+      ],
+      "user_attributes": [
+
+      ],
+      "created_at": "2016-08-18 12:02:49 -0600",
+      "updated_at": "2016-08-18 12:02:49 -0600"
+    },
+    {
+      "arn": "arn:aws:inspector:us-east-1:324320755747:target/0-ttQC7Qgp/template/0-ekXUj0eN/run/0-X8vp78fB/finding/0-vog30NXq",
+      "schema_version": 1,
+      "service": "Inspector",
+      "service_attributes": {
+        "schema_version": 1,
+        "assessment_run_arn": "arn:aws:inspector:us-east-1:324320755747:target/0-ttQC7Qgp/template/0-ekXUj0eN/run/0-X8vp78fB",
+        "rules_package_arn": "arn:aws:inspector:us-east-1:316112463485:rulespackage/0-gBONHN9h"
+      },
+      "asset_type": "ec2-instance",
+      "asset_attributes": {
+        "schema_version": 1,
+        "ipv4_addresses": [
+
+        ]
+      },
+      "title": "No potential security issues found",
+      "description": "Amazon Inspector did not find any potential security issues during this assessment.",
+      "recommendation": "No remediation needed.",
+      "severity": "Informational",
+      "numeric_severity": 0.0,
+      "confidence": 10,
+      "indicator_of_compromise": false,
+      "attributes": [
+
+      ],
+      "user_attributes": [
+
+      ],
+      "created_at": "2016-08-18 12:02:49 -0600",
+      "updated_at": "2016-08-18 12:02:49 -0600"
+    }
+  ]
+}

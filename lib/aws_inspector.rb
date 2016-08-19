@@ -1,15 +1,12 @@
 # Set's up and runs AWS Inspector service against newly created CI components
 class Inspector
-  def initialize
-    @name = "joshp-#{SecureRandom.hex(5)}"
-    @assessment_duration = 60
-    @rules_to_run = ['Security Best Practices',
-                     'Runtime Behavior Analysis']
-    @resource_target_tags = [{ key: 'auditable', value: 'true' }]
-  end
+  include InspectorLib
 
-  def aws
-    @aws ||= Aws::Inspector::Client.new
+  def initialize(options)
+    @name = "#{options['aws_name_prefix']}-#{SecureRandom.hex(5)}"
+    @assessment_duration = options['asset_duration']
+    @rules_to_run = options['rules_to_run']
+    @resource_target_tags = options['target_tags'].collect { |k, v| { key: k, value: v.to_s } }
   end
 
   def run
@@ -20,21 +17,26 @@ class Inspector
     start_assessment_run
     wait_for_assessment_run
     report_findings
+    evaluate_for_failure
   end
 
   def cleanup_resources
-    puts 'Cleaning up resources before exiting'
-    unless @assessment_run_arn.nil? && assessment_completed?
-      #aws.stop_assessment_run(assessment_run_arn: @assessment_run_arn)
-      #sleep [@assessment_duration, 60].min # Give us at most 60 seconds to shutdown the assessment run
-    end
-    
-    #aws.delete_assessment_target(assessment_target_arn: @assessment_target_arn) unless @assessment_target_arn.nil?
-    #aws.delete_assessment_template(assessment_template_arn: @assessment_template_arn) unless @assessment_template_arn.nil?
-    #aws.delete_assessment_run(assessment_run_arn: @assessment_run_arn) unless @assessment_run_arn.nil?
+    stop_resources unless @assessment_run_arn.nil? || assessment_completed?
+    delete_resources
   end
 
   private
+
+  def delete_resources
+    allow_fail { aws.delete_assessment_target(assessment_target_arn: @assessment_target_arn) unless @assessment_target_arn.nil? }
+    allow_fail { aws.delete_assessment_template(assessment_template_arn: @assessment_template_arn) unless @assessment_template_arn.nil? }
+    allow_fail { aws.delete_assessment_run(assessment_run_arn: @assessment_run_arn) unless @assessment_run_arn.nil? }
+  end
+
+  def stop_resources
+    allow_fail { aws.stop_assessment_run(assessment_run_arn: @assessment_run_arn) }
+    sleep [@assessment_duration, 60].min # Give us at most 60 seconds to shutdown the assessment run
+  end
 
   def retrieve_rule_arns
     region_rule_arns = aws.list_rules_packages.rules_package_arns
@@ -43,10 +45,8 @@ class Inspector
   end
 
   def wait_for_assessment_run
-    puts 'Waiting for assessment to complete'
-    Timeout::timeout(@assessment_duration + 180) do
-      until assessment_completed?
-        putc '.'
+    Timeout.timeout(@assessment_duration + 180) do
+      until assessment_completed? # rubocop:disable Style/WhileUntilModifier
         sleep 5
       end
     end
@@ -66,27 +66,16 @@ class Inspector
   end
 
   def describe_findings
-    aws.describe_findings(finding_arns: retrieve_finding_arns).findings
+    @assessment_findings = aws.describe_findings(finding_arns: retrieve_finding_arns).findings
+  end
+
+  def evaluate_for_failure
   end
 
   def report_findings
-    describe_findings.each do |issue|
-      begin
-        asset_attr = issue.asset_attributes
-        puts ''
-        puts "ASG: #{asset_attr.auto_scaling_group}" unless asset_attr.auto_scaling_group.nil?
-        puts "HOST: #{asset_attr.hostname}" unless asset_attr.hostname.nil?
-        puts "type: #{issue.asset_type}"
-        puts "id: #{issue.id}"
-        puts "agent: #{asset_attr.agent_id}"
-        puts "description: #{issue.description}"
-        puts "severity: #{issue.severity} - #{issue.numeric_severity}"
-        puts "confidence: #{issue.confidence}"
-        puts "ami_id: #{asset_attr.ami_id}"
-        puts "compromise: #{issue.indicator_of_compromise}"
-        puts "title: #{issue.title}"
-      end
-    end
+    converted_findings = describe_findings.map(&:to_hash)
+    report = { InspectorOutput: converted_findings }.to_json
+    $stdout.puts JSON.pretty_generate(JSON.parse(report))
   end
 
   def assessment_completed?
