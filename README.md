@@ -6,7 +6,7 @@ This is a tool to execute AWS inspector templates against targets and report the
   * Creates an AWS Inspector target
   * Creates an AWS Inspector template
   * Runs an AWS Inspector asessment run
-  * Reports the findings of that assessment
+  * Reports the findings of that assessment to stdout
 
 ## How it does it
 
@@ -56,3 +56,6 @@ Usage: ./inspector.rb [options]
   -d, --asset-duration DUR         Duration in seconds to run the assessment for
   -x, --[no-]cleanup-resources     Determines if resources created in AWS (Targets, templates & Runs) should be deleted after we are done
 ```
+
+## Evaluate for failure
+The evaluate for failure configuration is a method of failing your CI pipeline/toolchain when a severity, or compromise greater than what you have set has occurred. This works on numeric and/or true/false values within the output of the report. The config file has a few examples of how to use this but the most common are setting the numeric_severity and indicator_of_compromise. This way on critical or compromising issues you can fail your toolchain.

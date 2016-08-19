@@ -7,7 +7,7 @@ aws_name_prefix: mycipipeline
 
 # The minimum failures of each type to cause an exit status of the found issues. E.g. if you set severity to 3.0, anything higher than that will trigger a non-clean exit
 failure_metrics:
-  numeric_severity: 3
+  numeric_severity: 5
   indicator_of_compromise: true
 
 # The AWS Rulesets to run against your inspection tags, This is the name returned by the API as the arn is different per region

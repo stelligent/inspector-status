@@ -6,6 +6,7 @@ class Inspector
     @name = "#{options['aws_name_prefix']}-#{SecureRandom.hex(5)}"
     @assessment_duration = options['asset_duration']
     @rules_to_run = options['rules_to_run']
+    @failure_metrics = options['failure_metrics']
     @resource_target_tags = options['target_tags'].collect { |k, v| { key: k, value: v.to_s } }
   end
 
@@ -17,7 +18,6 @@ class Inspector
     start_assessment_run
     wait_for_assessment_run
     report_findings
-    evaluate_for_failure
   end
 
   def cleanup_resources
@@ -69,13 +69,24 @@ class Inspector
     @assessment_findings = aws.describe_findings(finding_arns: retrieve_finding_arns).findings
   end
 
-  def evaluate_for_failure
+  def evaluate_for_failure(report)
+    inspector_output = JSON.parse(report)
+    inspector_output['InspectorOutput'].each do |finding|
+      @failure_metrics.each do |name, value|
+        if [TrueClass, FalseClass].include?(value.class)
+          raise "One of your outputs raised a failure_metric (#{name} - #{value}) issue: #{finding}" if finding[name] == value
+        else
+          raise "One of your outputs raised a failure_metric (#{name} - #{value}) issue: #{finding}" if finding[name] >= value
+        end
+      end
+    end
   end
 
   def report_findings
     converted_findings = describe_findings.map(&:to_hash)
     report = { InspectorOutput: converted_findings }.to_json
     $stdout.puts JSON.pretty_generate(JSON.parse(report))
+    evaluate_for_failure(report)
   end
 
   def assessment_completed?
