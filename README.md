@@ -38,6 +38,10 @@ rake run
 
 ## Tests
 
+Note: Testing exclusively lint checking at this time, the methods require almost exclusively hitting the AWS API via aws-sdk. Inspector does not support cloudformation and the awspec gem does not support inspector either. 
+
+Support for inspector into awspec is being worked on to fill this void and give us true rspec unit testing.
+
 `rake test`
 
 ## AWS Resources
