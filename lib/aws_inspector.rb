@@ -75,7 +75,7 @@ class Inspector
       @failure_metrics.each do |name, value|
         if [TrueClass, FalseClass].include?(value.class)
           raise "One of your outputs raised a failure_metric (#{name} - #{value}) issue: #{finding}" if finding[name] == value
-        elsif finding[name] >= value
+        elsif finding[name] >= value.to_i
           raise "One of your outputs raised a failure_metric (#{name} - #{value}) issue: #{finding}"
         end
       end
