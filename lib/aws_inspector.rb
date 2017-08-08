@@ -4,7 +4,7 @@ class Inspector
 
   def initialize(options)
     @name = "#{options['aws_name_prefix']}-#{SecureRandom.hex(5)}"
-    @assessment_duration = options['asset_duration']
+    @assessment_duration = options['asset_duration'].to_i
     @rules_to_run = options['rules_to_run']
     @failure_metrics = options['failure_metrics']
     @resource_target_tags = options['target_tags'].collect { |k, v| { key: k, value: v.to_s } }
