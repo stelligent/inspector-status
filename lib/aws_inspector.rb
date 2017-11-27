@@ -51,7 +51,7 @@ class Inspector
       end
     end
   rescue Timeout::Error
-    puts 'We could not get results from the assessment run in time'
+    # puts 'We could not get results from the assessment run in time'
   end
 
   def create_template
