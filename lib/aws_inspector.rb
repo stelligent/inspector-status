@@ -66,7 +66,12 @@ class Inspector
   end
 
   def describe_findings
-    @assessment_findings = aws.describe_findings(finding_arns: retrieve_finding_arns).findings
+    finding_arns = retrieve_finding_arns
+    if finding_arns.any?
+      aws.describe_findings(finding_arns: retrieve_finding_arns).findings
+    else
+      []
+    end
   end
 
   def evaluate_for_failure(report)
