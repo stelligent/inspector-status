@@ -8,6 +8,7 @@ class Inspector
     @rules_to_run = options['rules_to_run']
     @failure_metrics = options['failure_metrics']
     @resource_target_tags = options['target_tags'].collect { |k, v| { key: k, value: v.to_s } }
+    @ignore_no_results = options['ignore_no_results']
   end
 
   def run
@@ -51,7 +52,9 @@ class Inspector
       end
     end
   rescue Timeout::Error
-    # puts 'We could not get results from the assessment run in time'
+    unless @ignore_no_results == true
+      raise 'We could not get results from the assessment run in time'
+    end
   end
 
   def create_template
