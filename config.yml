@@ -28,3 +28,6 @@ asset_duration: 60
 
 # Should AWS Created resources be deleted at the end of the assessment (Note: The run/findings will be kept)
 cleanup_resources: true
+
+#Should we ignore it if inspector finds no results?
+ignore_no_results: false
